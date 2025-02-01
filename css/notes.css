@@ -1,0 +1,290 @@
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.notes-section {
+    grid-column: 1 / -1;
+    margin: 10px 0;
+    color: var(--text-secondary);
+}
+
+.notes-section h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.note-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.note-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.note-content {
+    flex: 1;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.note-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.note-actions i {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+    color: var(--text-secondary);
+}
+
+.note-actions i:hover {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+}
+
+.note-actions .fa-thumbtack.pinned {
+    color: var(--primary-color);
+    transform: rotate(45deg);
+}
+
+.color-picker {
+    display: flex;
+    gap: 8px;
+}
+
+.color-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 2px solid var(--border-color);
+}
+
+.color-option:hover {
+    transform: scale(1.2);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+    color: var(--text-color);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+}
+
+#noteForm input[type="text"],
+#noteForm textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+#noteForm textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.6;
+}
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.notes-section {
+    grid-column: 1 / -1;
+    margin: 10px 0;
+    color: var(--text-secondary);
+}
+
+.notes-section h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.note-card {
+    border-radius: var(--border-radius);
+    padding: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: white;
+}
+
+.note-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 40%, transparent 60%);
+    pointer-events: none;
+    border-radius: var(--border-radius);
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.note-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.note-content {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.note-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.note-actions i {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.note-actions i:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.note-actions .fa-thumbtack.pinned {
+    color: white;
+    transform: rotate(45deg);
+}
+
+.color-picker {
+    display: flex;
+    gap: 8px;
+}
+
+.color-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.color-option:hover {
+    transform: scale(1.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+#noteForm input[type="text"],
+#noteForm textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+#noteForm textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+    color: var(--text-color);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+}

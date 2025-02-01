@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassMan - Modern Password Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/notes.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+    <div id="masterLock" class="master-lock">
+        <div class="lock-content">
+            <i class="fas fa-shield-alt"></i>
+            <h2>PassMan</h2>
+            <div class="pin-input">
+                <input type="password" id="pinInput" maxlength="4" placeholder="Enter PIN">
+                <button id="unlockBtn">Unlock</button>
+            </div>
+        </div>
+    </div>    
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>PassMan</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><i class="fas fa-key"></i> Passwords</li>
+                    <li><i class="fas fa-credit-card"></i> Cards</li>
+                    <li><i class="fas fa-note-sticky"></i> Notes</li>
+                    <li><i class="fas fa-gear"></i> Settings</li>
+                </ul>
+            </nav>
+        </div>
+
+        <main>
+            <!-- Passwords View -->
+            <div class="view" id="passwords-view">
+                <header>
+                    <div class="search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search passwords...">
+                    </div>
+                    <button class="add-btn" id="add-password-btn">
+                        <i class="fas fa-plus"></i> Add Password
+                    </button>                    
+                </header>
+                <div class="passwords-grid">
+                    <!-- Password cards will be populated here -->
+                </div>
+            </div>
+
+            <!-- Cards View -->
+            <div class="view" id="cards-view" style="display: none;">
+                <header>
+                    <div class="search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search cards...">
+                    </div>
+                    <button class="add-btn" id="add-card-btn">
+                        <i class="fas fa-plus"></i> Add Card
+                    </button>
+                </header>
+                <div class="cards-grid">
+                    <!-- Card items will be populated here -->
+                </div>
+            </div>
+
+            <!-- Notes View -->
+            <div class="view" id="notes-view" style="display: none;">
+                <header>
+                    <div class="search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search notes...">
+                    </div>
+                    <button class="add-btn" id="add-note-btn">
+                        <i class="fas fa-plus"></i> Add Note
+                    </button>
+                </header>
+                <div class="notes-grid">
+                    <!-- Notes will be populated here -->
+                </div>
+            </div>
+              <!-- Settings View -->
+              <div class="view" id="settings-view" style="display: none;">
+                  <div class="settings-container">
+                      <!-- Appearance Section -->
+                      <div class="settings-section">
+                          <div class="settings-header">
+                              <i class="fas fa-palette"></i>
+                              Appearance
+                          </div>
+                          <div class="settings-item">
+                              <span>Accent Color</span>
+                              <div class="color-picker">
+                                  <div class="color-option" data-color="#007AFF"></div>
+                                  <div class="color-option" data-color="#FF2D55"></div>
+                                  <div class="color-option" data-color="#5856D6"></div>
+                                  <div class="color-option" data-color="#34C759"></div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!-- Security Section -->
+                      <div class="settings-section">
+                          <div class="settings-header">
+                              <i class="fas fa-shield-alt"></i>
+                              Security
+                          </div>
+                          <div class="settings-item" id="pinSection">
+                              <span>Security PIN</span>
+                              <button class="settings-button" data-action="setup-pin">Set PIN</button>
+                          </div>
+                          <div class="settings-item">
+                              <span>Auto-Lock</span>
+                              <select class="settings-select" id="autoLockTime">
+                                  <option value="1">1 minute</option>
+                                  <option value="5">5 minutes</option>
+                                  <option value="15">15 minutes</option>
+                                  <option value="30">30 minutes</option>
+                                  <option value="0">Never</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <!-- Data Management -->
+                      <div class="settings-section">
+                          <div class="settings-header">
+                              <i class="fas fa-database"></i>
+                              Data Management
+                          </div>
+                          <div class="settings-item">
+                              <span>Export Data</span>
+                              <button class="settings-button" data-action="export">Export</button>
+                          </div>
+                          <div class="settings-item">
+                              <span>Import Data</span>
+                              <button class="settings-button" data-action="import">Import</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </main>
+    </div>
+      <!-- Add Password Modal -->
+      <div class="modal" id="passwordModal">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title">Add New Password</h2>
+                  <i class="fas fa-times" id="closePasswordModal"></i>
+              </div>
+              <form id="passwordForm">
+                  <div class="form-group">
+                      <label>Website</label>
+                      <input type="text" id="website" required>
+                  </div>
+                  <div class="form-group">
+                      <label>Username</label>
+                      <input type="text" id="username" required>
+                  </div>
+                  <div class="form-group">
+                      <label>Password</label>
+                      <div class="password-input">
+                          <input type="password" id="password" required>
+                          <i class="fas fa-eye"></i>
+                      </div>
+                  </div>
+                  <div class="form-actions">
+                      <button type="button" class="btn btn-cancel">Cancel</button>
+                      <button type="submit" class="btn btn-save">Save</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+
+      <!-- Add Card Modal -->
+      <div class="modal" id="cardModal">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title">Add New Card</h2>
+                  <i class="fas fa-times" id="closeCardModal"></i>
+              </div>
+              <form id="cardForm">
+                  <div class="form-group">
+                      <label>Card Type</label>
+                      <select id="cardType" required>
+                          <option value="Visa">Visa</option>
+                          <option value="Mastercard">Mastercard</option>
+                          <option value="Amex">American Express</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label>Card Number</label>
+                      <input type="text" id="cardNumber" maxlength="19" required>
+                  </div>
+                  <div class="form-group">
+                      <label>Card Holder</label>
+                      <input type="text" id="cardHolder" required>
+                  </div>
+                  <div class="form-group">
+                      <label>Expiry Date</label>
+                      <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                  </div>
+                  <div class="form-group">
+                      <label>CVV</label>
+                      <input type="password" id="cvv" maxlength="4" required>
+                  </div>
+                  <div class="form-actions">
+                      <button type="button" class="btn btn-cancel">Cancel</button>
+                      <button type="submit" class="btn btn-save">Save</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+
+      <!-- Add Note Modal -->
+<div class="modal" id="noteModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Add New Note</h2>
+            <i class="fas fa-times"></i>
+        </div>
+        <form id="noteForm">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="noteTitle" required>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea id="noteContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="noteCategory">
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="Ideas">Ideas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="notePin">
+                    Pin Note
+                </label>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-cancel">Cancel</button>
+                <button type="submit" class="btn btn-save">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
